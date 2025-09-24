@@ -190,9 +190,10 @@ function App() {
     p-8 m-4 max-w-sm 
     rounded-full 
     bg-white/70 backdrop-blur-sm 
-    shadow-2xl shadow-amber-300/50 
-    transition-all duration-300 ease-in-out 
-    hover:shadow-amber-400/80 hover:-translate-y-1 hover:scale-[1.02]
+    shadow-2xl shadow-amber-100/50 
+    transition-all duration-100 ease-in-out 
+    /* AJUSTES AQUI: Reduzida a opacidade e o movimento */
+    hover:shadow-amber-100/70 hover:-translate-y-[2px] hover:scale-[1.01]
   ">
     
     <img 
@@ -215,9 +216,7 @@ function App() {
       ">
         Dra. Renata Monteiro Gabriel
       </h3>
-    
     </div>
-    
   </div>
 </div>
           </div>
