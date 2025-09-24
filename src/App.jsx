@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button.jsx'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.jsx'
@@ -14,7 +13,8 @@ import {
   ChevronRight,
   Menu,
   X,
-  MessageCircle
+  MessageCircle,
+  BrainCircuit // Ícone novo para Ciência
 } from 'lucide-react'
 import './App.css'
 
@@ -25,10 +25,8 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
-  // Altura aproximada da navbar fixa (ajuste se mudar a altura)
   const NAV_HEIGHT = 80
 
-  // Atualiza seção ativa conforme o scroll
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'specialties', 'contact']
@@ -52,7 +50,6 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Evita "vazamento" (scroll do body) quando o menu mobile está aberto
   useEffect(() => {
     const { style } = document.body
     if (isMenuOpen) {
@@ -63,7 +60,6 @@ function App() {
     return () => { style.overflow = '' }
   }, [isMenuOpen])
 
-  // Fecha menu se aumentar pra desktop
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 768 && isMenuOpen) setIsMenuOpen(false)
@@ -80,6 +76,13 @@ function App() {
       setActiveSection(sectionId)
     }
     setIsMenuOpen(false)
+  }
+
+  const openWhatsApp = (message = '') => {
+    const phone = '5511948818047'
+    const encodedMessage = encodeURIComponent(message)
+    const url = `https://wa.me/${phone}?text=${encodedMessage}`
+    window.open(url, '_blank', 'noopener,noreferrer' )
   }
 
   const specialties = [
@@ -115,12 +118,10 @@ function App() {
       <nav className="fixed top-0 left-0 right-0 nav-container z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            {/* LOGO */}
             <div className="flex items-center space-x-3">
               <img src={logo} alt="ReumaVida" className="w-12 h-12 md:w-14 md:h-14 rounded-full shadow-lg" />
             </div>
             
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-2 sm:space-x-6">
               {[
                 { id: 'home', label: 'Início' },
@@ -141,7 +142,6 @@ function App() {
               ))}
             </div>
 
-            {/* Mobile menu button */}
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -155,7 +155,6 @@ function App() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
           <div
             className="md:hidden bg-background/95 backdrop-blur-sm border-t border-border absolute left-0 right-0 top-full"
@@ -196,64 +195,65 @@ function App() {
               <p className="elegant-text text-lg sm:text-xl mb-8 max-w-2xl">
                 Atendimento humanizado e especializado na zona sul de São Paulo
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  className="whatsapp-button text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6"
-                  onClick={() => window.open('https://wa.me/5511948818047', '_blank', 'noopener,noreferrer')}
-                >
-                  <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
+            <div className="flex flex-col sm:flex-row gap-4">
+                <Button className="btn-whatsapp" onClick={() => openWhatsApp('Olá, gostaria de marcar uma consulta.')}>
+                  <MessageCircle className="w-5 h-5 mr-2" />
                   Marcar consulta via WhatsApp
                 </Button>
-                <Button 
-                  className="elegant-button text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6"
-                  onClick={() => scrollToSection('about')}
-                >
-                  Sobre mim
-                  <ChevronRight className="w-5 h-5 ml-2" aria-hidden="true" />
+                <Button variant="outline" className="btn-secondary" onClick={() => scrollToSection('about')}>
+                  Sobre mim <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
             </div>
             
-            <div className="slide-in-right flex justify-center p-4 sm:p-6 relative">
-              {/* Card de Perfil com ajustes responsivos para não vazar */}
-              <div
-                className="
-                  motion-safe:floating-animation 
-                  flex flex-col items-center text-center 
-                  relative z-10 
-                  p-6 sm:p-8 w-full max-w-xs sm:max-w-sm 
-                  rounded-3xl sm:rounded-full 
-                  bg-white/70 backdrop-blur-sm 
-                  shadow-2xl shadow-amber-100/50 
-                  transition-all duration-300 ease-in-out 
-                  hover:shadow-amber-100/70 hover:-translate-y-[2px] hover:scale-[1.01]
-                "
-              >
-                <img 
-                  src="/renata.png" 
-                  alt="Foto da Dra. Renata Monteiro" 
-                  className="
-                    w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 
-                    mb-4 mx-auto 
-                    rounded-full object-cover 
-                    border-8 border-white shadow-lg
-                  " 
-                />
-                <div className="text-center mt-2">
-                  <h3
-                    className="
-                      text-base sm:text-lg lg:text-xl 
-                      font-semibold 
-                      text-[#8B6E4E] 
-                      leading-snug break-words
-                      max-w-[12rem] sm:max-w-[16rem] md:max-w-[20rem] mx-auto
-                    "
-                  >
-                    Dra. Renata Monteiro Gabriel
-                  </h3>
-                </div>
-              </div>
-            </div>
+       <div className="slide-in-right flex justify-center p-4 sm:p-6 relative">
+  <div className="relative group">
+    {/* Glow suave */}
+    <div className="absolute -inset-2 bg-gradient-to-br from-accent via-primary to-amber-300 rounded-full blur-lg opacity-40 group-hover:opacity-60 transition duration-500"></div>
+
+    {/* Card da Foto */}
+    <div
+      className="
+        relative 
+        flex flex-col items-center text-center
+        z-10
+        p-6 sm:p-8
+        w-full max-w-xs sm:max-w-sm
+        rounded-2xl
+        bg-white/80 backdrop-blur-xl
+        shadow-xl shadow-amber-100/50
+        transition-all duration-500 ease-in-out
+        hover:shadow-amber-200/70
+      "
+    >
+      {/* Imagem */}
+      <img
+        src="/renata.png"
+        alt="Foto da Dra. Renata Monteiro"
+        className="
+          w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48
+          mb-4 mx-auto
+          rounded-full object-cover
+          border-4 border-white/90 shadow-md
+        "
+      />
+
+      {/* Nome */}
+      <h3
+        className="
+          text-lg sm:text-xl lg:text-2xl 
+          font-semibold 
+          text-[#8B6E4E] 
+          leading-tight
+          max-w-[14rem] sm:max-w-[18rem] md:max-w-[22rem] mx-auto
+        "
+      >
+        Dra. Renata Monteiro Gabriel
+      </h3>
+    </div>
+  </div>
+</div>
+
           </div>
         </div>
       </section>
@@ -269,7 +269,6 @@ function App() {
           </div>
           
           <div className="grid lg:grid-cols-2 gap-10 md:gap-12 items-start">
-            {/* Texto principal */}
             <div className="fade-in">
               <div className="info-card">
                 <div className="flex flex-col items-center lg:items-start mb-6">
@@ -300,7 +299,6 @@ function App() {
               </div>
             </div>
             
-            {/* Cards informativos */}
             <div className="fade-in">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 auto-rows-fr">
                 <Card className="section-card p-6 text-center h-full hover:shadow-lg hover:-translate-y-1 transition">
@@ -329,8 +327,7 @@ function App() {
                       <Heart className="w-7 h-7" aria-hidden="true" />
                     </div>
                     <h4 className="font-bold text-foreground mb-2">Abordagem</h4>
-                    <p className="text-sm text-muted-foreground">Empatia e escuta ativa</p>
-                  </CardContent>
+                    <p className="text-sm text-muted-foreground">Empatia e escuta ativa</p>                  </CardContent>
                 </Card>
                 
                 <Card className="section-card p-6 text-center h-full hover:shadow-lg hover:-translate-y-1 transition">
@@ -363,7 +360,7 @@ function App() {
           
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
             {specialties.map((specialty, index) => (
-              <Card key={index} className="section-card h-full flex flex-col fade-in">
+              <Card key={index} className="section-card h-full flex flex-col fade-in hover:border-accent transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <CardHeader>
                   <div className="flex items-center space-x-4">
                     <div className="specialty-icon">
@@ -390,8 +387,8 @@ function App() {
                     </ul>
                   </div>
                   <Button 
-                    className="mt-4 w-full whatsapp-button"
-                    onClick={() => window.open('https://wa.me/5511948818047', '_blank', 'noopener,noreferrer')}
+                    className="mt-auto pt-4 w-full whatsapp-button"
+                    onClick={() => openWhatsApp(`Olá, gostaria de agendar uma consulta sobre ${specialty.title}.`)}
                   >
                     <MessageCircle className="w-4 h-4 mr-2" aria-hidden="true" />
                     Agendar consulta
@@ -413,66 +410,78 @@ function App() {
             <div className="section-divider"></div>
           </div>
           
-        {/* Cards iguais em altura */}
-<div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-stretch">
-  {/* Card: Informações de Contato */}
-  <Card className="section-card p-4 sm:p-6 md:p-8 h-full">
-    <CardHeader>
-      <CardTitle className="text-xl sm:text-2xl text-foreground mb-4 sm:mb-6">
-        Informações de Contato
-      </CardTitle>
-    </CardHeader>
-    <CardContent className="space-y-4 sm:space-y-6">
-      <div className="flex items-start space-x-3 sm:space-x-4">
-        <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-accent mt-1 flex-shrink-0" aria-hidden="true" />
-        <div>
-          <h4 className="font-semibold text-foreground">Endereço</h4>
-          <p className="text-sm sm:text-base text-muted-foreground">
-            Avenida Adolfo Pinheiro, n°1000<br />
-            Conjunto 31 - Santo Amaro<br />
-            São Paulo - SP
-          </p>
-        </div>
-      </div>
-      {/* ...outros itens */}
-      <Button 
-        className="w-full whatsapp-button text-base sm:text-lg py-4 sm:py-5 mt-4"
-        onClick={() => window.open('https://wa.me/5511948818047', '_blank', 'noopener,noreferrer')}
-      >
-        <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
-        Entrar em contato via WhatsApp
-      </Button>
-    </CardContent>
-  </Card>
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-stretch">
+            <Card className="section-card p-4 sm:p-6 md:p-8 h-full">
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl text-foreground mb-4 sm:mb-6">
+                  Informações de Contato
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 sm:space-y-6">
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-accent mt-1 flex-shrink-0" aria-hidden="true" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Endereço</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground">
+                      Avenida Adolfo Pinheiro, n°1000  
 
-  {/* Card: Minha Abordagem */}
-  <Card className="section-card p-4 sm:p-6 md:p-8 h-full">
-    <CardHeader>
-      <CardTitle className="text-xl sm:text-2xl text-foreground mb-4 sm:mb-6">
-        Minha Abordagem
-      </CardTitle>
-    </CardHeader>
-    <CardContent className="space-y-3 sm:space-y-4">
-      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-        Acredito que o cuidado em Reumatologia vai além da prescrição...
-      </p>
-      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-        Meu compromisso é oferecer um atendimento de qualidade...
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
-        <div className="text-center p-3 sm:p-4 bg-accent/10 rounded-lg">
-          <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-accent mx-auto mb-2" aria-hidden="true" />
-          <h5 className="font-semibold text-foreground text-sm sm:text-base">Empatia</h5>
-        </div>
-        {/* ...outros ícones */}
-      </div>
-    </CardContent>
-  </Card>
-</div>
+                      Conjunto 31 - Santo Amaro  
 
+                      São Paulo - SP
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-accent mt-1 flex-shrink-0" aria-hidden="true" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Horário de Atendimento</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground">
+                      Segunda a Sexta: 9:00 - 18:00
+                    </p>
+                  </div>
+                </div>
+                <Button 
+                  className="w-full whatsapp-button text-base sm:text-lg py-4 sm:py-5 mt-4"
+                  onClick={() => openWhatsApp('Olá, gostaria de entrar em contato.')}
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
+                  Entrar em contato via WhatsApp
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="section-card p-4 sm:p-6 md:p-8 h-full">
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl text-foreground mb-4 sm:mb-6">
+                  Minha Abordagem
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 sm:space-y-4">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  Acredito que o cuidado em Reumatologia vai além da prescrição. Envolve escuta, acolhimento e uma parceria genuína com cada paciente para construir um plano de tratamento individualizado.
+                </p>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  Meu compromisso é oferecer um atendimento de qualidade, baseado em evidências científicas e, acima de tudo, humano.
+                </p>
+                <div className="grid grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
+                  <div className="approach-item text-center p-3 sm:p-4 bg-accent/10 rounded-lg">
+                    <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-accent mx-auto mb-2" aria-hidden="true" />
+                    <h5 className="font-semibold text-foreground text-sm sm:text-base">Empatia</h5>
+                  </div>
+                  <div className="approach-item text-center p-3 sm:p-4 bg-accent/10 rounded-lg">
+                    <BrainCircuit className="w-6 h-6 sm:w-8 sm:h-8 text-accent mx-auto mb-2" aria-hidden="true" />
+                    <h5 className="font-semibold text-foreground text-sm sm:text-base">Ciência</h5>
+                  </div>
+                  <div className="approach-item text-center p-3 sm:p-4 bg-accent/10 rounded-lg">
+                    <Stethoscope className="w-6 h-6 sm:w-8 sm:h-8 text-accent mx-auto mb-2" aria-hidden="true" />
+                    <h5 className="font-semibold text-foreground text-sm sm:text-base">Cuidado</h5>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
-        {/* Mapa Google */}
         <div className="mt-12 md:mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
           <h3 className="text-2xl font-bold text-center mb-6">Como chegar</h3>
           <div
@@ -491,7 +500,7 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
+{/* Footer */}
       <footer className="footer-gradient text-background py-12 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">

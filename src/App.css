@@ -424,13 +424,12 @@ img, iframe { max-width: 100%; }
 .footer-gradient::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B89F7D' fill-opacity='0.05'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1240' height='200'%3E%3Cpath fill='%23ffffff' fill-opacity='0.05' d='M0 80 C 480 160, 960 0, 1440 80 V200 H0 Z'/%3E%3C/svg%3E") no-repeat center bottom / cover;
   pointer-events: none;
 }
+
+
 
 /* Responsive improvements */
 @media (max-width: 768px) {
