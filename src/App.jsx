@@ -180,31 +180,46 @@ function App() {
               </div>
             </div>
             
-         <div className="slide-in-right flex justify-center p-4 relative"> 
+<div className="slide-in-right flex justify-center p-6 relative"> 
   
-  {/* Elemento Decorativo: Círculo Bege (Fundo) */}
-  <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-    <div className="w-64 h-64 bg-amber-100 rounded-full opacity-50 transform translate-y-8 blur-xl"></div>
-  </div>
-  
-  {/* Card do Perfil com Efeito de Hover */}
-  <div className="profile-placeholder floating-animation flex flex-col items-center text-center 
-                relative z-10 p-6 m-4 bg-white rounded-xl shadow-lg transition-all duration-300 ease-in-out 
-                hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02]">
+  {/* Card de Perfil Circular com Fundo Bege Suave e Efeito Hover */}
+  <div className="
+    motion-safe:floating-animation 
+    flex flex-col items-center text-center 
+    relative z-10 
+    p-8 m-4 max-w-sm 
+    rounded-full 
+    bg-white/70 backdrop-blur-sm 
+    shadow-2xl shadow-amber-300/50 
+    transition-all duration-300 ease-in-out 
+    hover:shadow-amber-400/80 hover:-translate-y-1 hover:scale-[1.02]
+  ">
     
     <img 
       src="/renata.png" 
       alt="Foto da Dra. Renata Monteiro" 
-      className="w-50 h-40 mb-3 mx-auto rounded-full object-cover border-4 border-white shadow-md" 
+      className="
+        w-40 h-40 md:w-48 md:h-48 
+        mb-4 mx-auto 
+        rounded-full object-cover 
+        border-8 border-white shadow-lg
+      " 
     />
     
-    <div className="text-center">
-      <h3 className="text-sm sm:text-base md:text-lg font-bold text-foreground leading-snug break-words max-w-[180px] mx-auto">
-        <span className="accent-text">Dra. Renata Monteiro Gabriel</span>
+    <div className="text-center mt-2">
+      <h3 className="
+        text-base md:text-lg lg:text-xl 
+        font-semibold 
+        text-[#8B6E4E] 
+        leading-snug break-words max-w-[200px] mx-auto
+      ">
+        Dra. Renata Monteiro Gabriel
       </h3>
+    
     </div>
+    
   </div>
-            </div>
+</div>
           </div>
         </div>
       </section>
