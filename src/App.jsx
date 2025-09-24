@@ -413,91 +413,63 @@ function App() {
             <div className="section-divider"></div>
           </div>
           
-          {/* Cards iguais em altura */}
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-stretch">
-            {/* Card: Informações de Contato */}
-            <Card className="section-card p-8 h-full">
-              <CardHeader>
-                <CardTitle className="text-2xl text-foreground mb-6">
-                  Informações de Contato
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <MapPin className="w-6 h-6 text-accent mt-1 flex-shrink-0" aria-hidden="true" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">Endereço</h4>
-                    <p className="text-muted-foreground">
-                      Avenida Adolfo Pinheiro, n°1000<br />
-                      Conjunto 31 - Santo Amaro<br />
-                      São Paulo - SP
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <Phone className="w-6 h-6 text-accent mt-1 flex-shrink-0" aria-hidden="true" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">WhatsApp</h4>
-                    <p className="text-muted-foreground">(11) 94881-8047</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <Clock className="w-6 h-6 text-accent mt-1 flex-shrink-0" aria-hidden="true" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">Atendimento</h4>
-                    <p className="text-muted-foreground">
-                      Consultório particular<br />
-                      Estrutura confortável e acolhedora
-                    </p>
-                  </div>
-                </div>
-                
-                <Button 
-                  className="w-full whatsapp-button text-lg py-5 sm:py-6 mt-4"
-                  onClick={() => window.open('https://wa.me/5511948818047', '_blank', 'noopener,noreferrer')}
-                >
-                  <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
-                  Entrar em contato via WhatsApp
-                </Button>
-              </CardContent>
-            </Card>
-            
-            {/* Card: Minha Abordagem */}
-            <Card className="section-card p-8 h-full">
-              <CardHeader>
-                <CardTitle className="text-2xl text-foreground mb-6">
-                  Minha Abordagem
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground leading-relaxed">
-                  Acredito que o cuidado em Reumatologia vai além da prescrição: é preciso compreender 
-                  a história, os sintomas e os impactos de cada doença na vida do paciente.
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  Meu compromisso é oferecer um atendimento de qualidade, humano e atualizado, 
-                  sempre aliando ciência, empatia e escuta ativa.
-                </p>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-                  <div className="text-center p-4 bg-accent/10 rounded-lg">
-                    <Heart className="w-8 h-8 text-accent mx-auto mb-2" aria-hidden="true" />
-                    <h5 className="font-semibold text-foreground">Empatia</h5>
-                  </div>
-                  <div className="text-center p-4 bg-accent/10 rounded-lg">
-                    <Stethoscope className="w-8 h-8 text-accent mx-auto mb-2" aria-hidden="true" />
-                    <h5 className="font-semibold text-foreground">Ciência</h5>
-                  </div>
-                  <div className="text-center p-4 bg-accent/10 rounded-lg">
-                    <Activity className="w-8 h-8 text-accent mx-auto mb-2" aria-hidden="true" />
-                    <h5 className="font-semibold text-foreground">Escuta Ativa</h5>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+        {/* Cards iguais em altura */}
+<div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-stretch">
+  {/* Card: Informações de Contato */}
+  <Card className="section-card p-4 sm:p-6 md:p-8 h-full">
+    <CardHeader>
+      <CardTitle className="text-xl sm:text-2xl text-foreground mb-4 sm:mb-6">
+        Informações de Contato
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-4 sm:space-y-6">
+      <div className="flex items-start space-x-3 sm:space-x-4">
+        <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-accent mt-1 flex-shrink-0" aria-hidden="true" />
+        <div>
+          <h4 className="font-semibold text-foreground">Endereço</h4>
+          <p className="text-sm sm:text-base text-muted-foreground">
+            Avenida Adolfo Pinheiro, n°1000<br />
+            Conjunto 31 - Santo Amaro<br />
+            São Paulo - SP
+          </p>
+        </div>
+      </div>
+      {/* ...outros itens */}
+      <Button 
+        className="w-full whatsapp-button text-base sm:text-lg py-4 sm:py-5 mt-4"
+        onClick={() => window.open('https://wa.me/5511948818047', '_blank', 'noopener,noreferrer')}
+      >
+        <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
+        Entrar em contato via WhatsApp
+      </Button>
+    </CardContent>
+  </Card>
+
+  {/* Card: Minha Abordagem */}
+  <Card className="section-card p-4 sm:p-6 md:p-8 h-full">
+    <CardHeader>
+      <CardTitle className="text-xl sm:text-2xl text-foreground mb-4 sm:mb-6">
+        Minha Abordagem
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-3 sm:space-y-4">
+      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+        Acredito que o cuidado em Reumatologia vai além da prescrição...
+      </p>
+      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+        Meu compromisso é oferecer um atendimento de qualidade...
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
+        <div className="text-center p-3 sm:p-4 bg-accent/10 rounded-lg">
+          <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-accent mx-auto mb-2" aria-hidden="true" />
+          <h5 className="font-semibold text-foreground text-sm sm:text-base">Empatia</h5>
+        </div>
+        {/* ...outros ícones */}
+      </div>
+    </CardContent>
+  </Card>
+</div>
+
         </div>
 
         {/* Mapa Google */}
